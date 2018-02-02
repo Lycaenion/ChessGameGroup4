@@ -36,6 +36,5 @@ public class GameBoard {
         primaryStage.show();
     }
 
-    public void create
 }
 
