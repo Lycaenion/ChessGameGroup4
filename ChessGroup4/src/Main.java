@@ -1,30 +1,25 @@
 import javafx.application.Application;
-        import javafx.geometry.HPos;
-        import javafx.geometry.VPos;
-        import javafx.scene.Scene;
-        import javafx.scene.control.Control;
-        import javafx.scene.layout.ColumnConstraints;
-        import javafx.scene.layout.GridPane;
-        import javafx.scene.layout.Priority;
-        import javafx.scene.layout.RowConstraints;
-        import javafx.scene.layout.StackPane;
-        import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        launch(args);
+        try{
+            launch(args);
+            System.exit(0);
+        }catch (Exception error){
+            error.printStackTrace();
+            System.exit(0);
+        }
     }
-
-    //Window settings
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Chess Showdown");
-        StackPane root = new StackPane();
-        primaryStage.setScene(new Scene(root, 550, 650));
-        primaryStage.show();
+    public void start(Stage primaryStage) throws Exception{
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.createBoard(primaryStage);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
