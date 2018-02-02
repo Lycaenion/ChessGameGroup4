@@ -5,29 +5,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class GameBoard{
+public class GameBoard {
 
-    public void createBoard(Stage primaryStage){
+    public void createBoard(Stage primaryStage) {
         primaryStage.setTitle("Chess Showdown");
 
         BorderPane root = new BorderPane();
         Scene primaryScene = new Scene(root, 500, 400);
         primaryStage.setScene(primaryScene);
-
-
         GridPane grid = new GridPane();
         root.setCenter(grid);
 
 
-
-        for (int column = 0; column < 8; column++){
-            for(int row = 0; row < 8; row++){
+        //creates chess board
+        for (int column = 0; column < 8; column++) {
+            for (int row = 0; row < 8; row++) {
                 Rectangle rect = new Rectangle();
                 rect.setHeight(50);
                 rect.setWidth(50);
-                if ((column + row) % 2 == 0){
+                if ((column + row) % 2 == 0) {
                     rect.setFill(Color.BLACK);
-                }else{
+                } else {
                     rect.setFill(Color.WHITE);
                 }
                 GridPane.setColumnIndex(rect, column);
@@ -38,5 +36,6 @@ public class GameBoard{
         primaryStage.show();
     }
 
-    }
+    public void create
+}
 
