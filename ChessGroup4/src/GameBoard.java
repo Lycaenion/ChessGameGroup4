@@ -1,6 +1,4 @@
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -11,15 +9,20 @@ public class GameBoard {
 
     public void createBoard(Stage primaryStage) {
         primaryStage.setTitle("Chess Showdown");
-
         BorderPane root = new BorderPane();
         Scene primaryScene = new Scene(root, 500, 400);
         primaryStage.setScene(primaryScene);
         GridPane grid = new GridPane();
         root.setCenter(grid);
 
+        //White Pieces
+        Pawn WHITEPAWN = new Pawn(0,1);
+        Rook WHITEROOK = new Rook(0,0);
 
-        Pawn p = new Pawn(1,1,true);
+        //Black Pieces
+        Pawn BLACKPAWN = new Pawn(7,6);
+        Rook BLACKROOK = new Rook(7,7);
+
 
         //creates chess board
         for (int column = 0; column < 8; column++) {
@@ -39,8 +42,12 @@ public class GameBoard {
             }
         }
 
+        // Adds pawn and rook pieces to the grid
+        grid.add(WHITEPAWN.whitePawn,WHITEPAWN.getxPosition(),WHITEPAWN.getyPosition());
+        grid.add(WHITEROOK.whiteRook,WHITEROOK.getxPosition(),WHITEROOK.getyPosition());
 
-        grid.add(p.whitePawn,1,2);
+        grid.add(BLACKROOK.blackRook,BLACKROOK.getxPosition(),BLACKROOK.getyPosition());
+        grid.add(BLACKPAWN.blackPawn,BLACKPAWN.getxPosition(),BLACKPAWN.getyPosition());
         primaryStage.show();
     }
 
