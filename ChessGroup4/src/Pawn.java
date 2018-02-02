@@ -1,8 +1,16 @@
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Pawn extends Piece implements IPieceLogic {
 
-    public Pawn(int xPosition, int yPosition, boolean pieceIsWhite, String pieceImageName) {
-        super(xPosition, yPosition, pieceIsWhite, pieceImageName);
+    ImageView whitePawn = new ImageView(new Image("/bilderchess/white_pawn.png"));
+    String blackPawn = "/bilderchess/black_pawn.png";
+
+    public Pawn(int xPosition, int yPosition, boolean pieceIsWhite) {
+        super(xPosition, yPosition, pieceIsWhite);
+
     }
+
 
     @Override
     public void movePiece() {
@@ -11,11 +19,11 @@ public class Pawn extends Piece implements IPieceLogic {
 
     @Override
     public boolean isMovePossible() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAlive() {
-        return false;
+        return true;
     }
 }

@@ -1,27 +1,24 @@
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Piece {
     private int xPosition;
     private int yPosition;
     private final int pieceImageHeight;
     private final int pieceImageWidth;
     private boolean pieceIsWhite;
-    private String pieceImageName;
 
-    public Piece(int xPosition, int yPosition, boolean pieceIsWhite, String pieceImageName) {
+
+    public Piece(int xPosition, int yPosition, boolean pieceIsWhite) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.pieceImageHeight = 50;
         this.pieceImageWidth = 50;
         this.pieceIsWhite = pieceIsWhite;
-        this.pieceImageName = pieceImageName;
+
+
     }
 
-    public String getPieceImageName() {
-        return pieceImageName;
-    }
-
-    public void setPieceImageName(String pieceImageName) {
-        this.pieceImageName = pieceImageName;
-    }
 
     public boolean isPieceIsWhite() {
         return pieceIsWhite;

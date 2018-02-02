@@ -1,4 +1,6 @@
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -17,6 +19,8 @@ public class GameBoard {
         root.setCenter(grid);
 
 
+        Pawn p = new Pawn(1,1,true);
+
         //creates chess board
         for (int column = 0; column < 8; column++) {
             for (int row = 0; row < 8; row++) {
@@ -24,15 +28,19 @@ public class GameBoard {
                 rect.setHeight(50);
                 rect.setWidth(50);
                 if ((column + row) % 2 == 0) {
-                    rect.setFill(Color.BLACK);
+                    rect.setFill(Color.GREY);
                 } else {
-                    rect.setFill(Color.WHITE);
+                    rect.setFill(Color.HOTPINK);
                 }
                 GridPane.setColumnIndex(rect, column);
                 GridPane.setRowIndex(rect, row);
                 grid.getChildren().addAll(rect);
+
             }
         }
+
+
+        grid.add(p.whitePawn,1,2);
         primaryStage.show();
     }
 
