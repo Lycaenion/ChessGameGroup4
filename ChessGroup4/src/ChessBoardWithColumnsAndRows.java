@@ -6,9 +6,9 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 public class ChessBoardWithColumnsAndRows {
+    private float[] hotPink = new float[]{0.92f};
 
     private final JPanel gui = new JPanel(new BorderLayout(3, 3));
-    //private JButton[][] chessBoardSquares = new JButton[8][8];
     private Squares[][] chessBoardSquares = new Squares[8][8];
     private JPanel chessBoard;
     private final JLabel message = new JLabel(
@@ -25,16 +25,6 @@ public class ChessBoardWithColumnsAndRows {
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
-        tools.add(new JButton("New")); // TODO - add functionality!
-        tools.add(new JButton("Save")); // TODO - add functionality!
-        tools.add(new JButton("Restore")); // TODO - add functionality!
-        tools.addSeparator();
-        tools.add(new JButton("Resign")); // TODO - add functionality!
-        tools.addSeparator();
-        tools.add(message);
-
-        gui.add(new JLabel("?"), BorderLayout.LINE_START);
-
         chessBoard = new JPanel(new GridLayout(0, 9));
         chessBoard.setBorder(new LineBorder(Color.BLACK));
         gui.add(chessBoard);
@@ -50,7 +40,7 @@ public class ChessBoardWithColumnsAndRows {
                 if ((rows % 2 == 1 && columns % 2 == 1)
                         //) {
                         || (rows % 2 == 0 && columns % 2 == 0)) {
-                    b.setBackground(Color.WHITE);
+                    b.setBackground(Color.getHSBColor(	330, 58.8f, 100));
                 } else {
                     b.setBackground(Color.BLACK);
                 }
