@@ -1,2 +1,18 @@
-public class Pawn {
+public class Pawn extends Piece{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

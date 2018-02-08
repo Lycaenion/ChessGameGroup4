@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 
 
 
-public class GameBoard2 {
+public class GameBoard {
 
-    private final int w = 8;
-    private final int h = 8;
-    private JButton[][] tiles = new JButton[w][h];
+    private final int ROWS = 8;
+    private final int COLUMNS = 8;
+    private JButton[][] tiles = new JButton[ROWS][COLUMNS];
     Color HOTPINK = new Color(255,105,180);
     private final JLabel message = new JLabel("Chess!");
     private static final String col = "ABCDEFGH";
@@ -20,7 +20,7 @@ public class GameBoard2 {
     private JPanel gui = new JPanel(new BorderLayout(3,3));
 
 
-    GameBoard2(){
+    GameBoard(){
         createGui();
     }
 
