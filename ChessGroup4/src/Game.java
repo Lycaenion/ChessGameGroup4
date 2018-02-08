@@ -2,7 +2,11 @@ import javax.swing.*;
 
 public class Game {
 
+
+
     Game() {
+
+
 
         GameBoard board = new GameBoard();
 
@@ -12,6 +16,7 @@ public class Game {
         f.setLocationByPlatform(true);
         f.pack();
         f.setMinimumSize(f.getSize());
+        f.setResizable(false);
         f.setVisible(true);
     }
 }

@@ -16,17 +16,18 @@ public class GameBoard {
     private static final String col = "ABCDEFGH";
     private JPanel chessBoard;
     private JButton move = new JButton("Make a move!");
-
     private JPanel gui = new JPanel(new BorderLayout(3,3));
+    Piece piece;
 
 
     GameBoard(){
         createGui();
+
     }
 
 
     public void createGui(){
-        gui.setBorder(new EmptyBorder(5,5,5,5));
+        gui.setBorder(new EmptyBorder(5,5,5,100));
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
@@ -36,7 +37,7 @@ public class GameBoard {
         }
         tools.add(move);
 
-        chessBoard = new JPanel(new GridLayout(0,9));
+        chessBoard = new JPanel(new GridLayout(10,11));
         chessBoard.setBorder(new LineBorder(Color.BLACK));
         gui.add(chessBoard);
 
@@ -47,6 +48,7 @@ public class GameBoard {
             for (int y = 0; y < tiles.length; y++) {
                 JButton square = new JButton();
                 square.setMargin(buttonMargin);
+
 
                 ImageIcon icon = new ImageIcon(
                         new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
@@ -62,11 +64,10 @@ public class GameBoard {
         }
         chessBoard.add(new JLabel(""));
         chessBoard.setBackground(Color.LIGHT_GRAY);
-
-        for (int x = 0; x < 8; x++){
-            chessBoard.add(
-                    new JLabel(col.substring(x,x+1),
-                            SwingConstants.CENTER));
+        for (int x = 0; x < 8; x++) {
+                chessBoard.add(
+                        new JLabel(col.substring(x, x + 1),
+                                SwingConstants.CENTER));
         }
 
         for (int x = 0; x < 8; x++) {
@@ -80,6 +81,12 @@ public class GameBoard {
                 }
             }
         }
+
+    }
+
+    public void setPiece(){
+
+
     }
 
     public JComponent getChessBoard(){
@@ -89,6 +96,8 @@ public class GameBoard {
     public JComponent getGui(){
         return gui;
     }
+
+
 
 
 }
