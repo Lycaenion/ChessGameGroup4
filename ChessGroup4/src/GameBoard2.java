@@ -11,7 +11,7 @@ public class GameBoard2 {
     private final int w = 8;
     private final int h = 8;
     private JButton[][] tiles = new JButton[w][h];
-
+    Color HOTPINK = new Color(255,105,180);
     private final JLabel message = new JLabel("Chess!");
     private static final String col = "ABCDEFGH";
     private JPanel chessBoard;
@@ -53,7 +53,7 @@ public class GameBoard2 {
 
                 square.setIcon(icon);
                 if ((x+y)%2==0){
-                    square.setBackground(Color.ORANGE);
+                    square.setBackground(HOTPINK);
                 }else{
                     square.setBackground(Color.WHITE);
                 }
