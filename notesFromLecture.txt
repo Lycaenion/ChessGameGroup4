@@ -1,0 +1,26 @@
+ArrayList<piece> whitePieces = new ArrayList();
+whitePieces.stream().foreach(p ->{
+
+switch(PieceType){
+case pawn:
+	newWhitePiece = new arrayList.add(piece)
+
+
+}
+
+board[x][y] = newWhitePiece
+
+
+____________________________________________
+
+myBoard.tiles.stream()
+	foreach(row -> {
+		row.stream().forEach(tile t ->{
+			System.out.println(t.piece + " ");
+		})
+		System.out.println("/n");
+	});
+myBoard.tiles.stream().filter(row ->{
+	return row.stream().filter(tile t -> {
+		return t + piece;
+})
