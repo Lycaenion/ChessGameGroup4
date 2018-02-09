@@ -1,87 +1,111 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
+import static java.awt.Color.*;
 
 public class GameBoard {
 
-    private final int rows = 8;
-    private final int columns = 8;
-    private JButton[][] tiles = new JButton[rows][columns];
+    private JFrame f = new JFrame("Chess!");
+    private JPanel p = new JPanel(new GridLayout(9,9,2,2));
+    private JPanel border = new JPanel(new BorderLayout(10,10));
+    private JToolBar menu = new JToolBar();
+    private static int ROWS = 8;
+    private static int COLUMNS = 8;
+    private static Piece emptyTile = new EmptyTile();
+    private static JButton[][] squares = new JButton[ROWS][COLUMNS];
+    private static Piece[][] board = new Piece[8][8];
 
-    private final JLabel message = new JLabel("Chess!");
-    private static final String columnText = "ABCDEFGH";
-    private JPanel chessBoard;
 
-    private JPanel gui = new JPanel(new BorderLayout(3,3));
+    GameBoard() { showBoard(); }
 
-    GameBoard(){
-        createGui();
+    private void addMoveButton()
+    {
+        menu.setFloatable(false);
+        Action movePieces = new AbstractAction("Make a move") {
+            @Override
+            public void actionPerformed(ActionEvent e) { /*movePiece(); */ }};
+
+        for (int i = 0; i < 25; i++) { menu.addSeparator(); }
+        menu.add(movePieces);
+        p.setBorder(new EmptyBorder(5,5,0,5));
     }
 
+    private void createBoard(JFrame game)
+    {
+        //Create the chessboard
+        for (int x = 0; x < ROWS; x++) {
+            for (int y = 0; y < COLUMNS; y++) {
+                JButton tiles = new JButton();
 
-    public void createGui(){
-        gui.setBorder(new EmptyBorder(5,5,5,5));
-        JToolBar tools = new JToolBar();
-        tools.setFloatable(false);
-        gui.add(tools, BorderLayout.PAGE_START);
-        tools.add(message);
-
-        chessBoard = new JPanel(new GridLayout(0,9));
-        chessBoard.setBorder(new LineBorder(Color.BLACK));
-        gui.add(chessBoard);
-
-
-
-        Insets buttonMargin = new Insets(0,0,0,0);
-        for (int x = 0; x < tiles.length ; x++) {
-            for (int y = 0; y < tiles.length; y++) {
-                JButton square = new JButton();
-                square.setMargin(buttonMargin);
-
-                ImageIcon icon = new ImageIcon(
-                        new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
-
-                square.setIcon(icon);
+                //setBackgroundColor
                 if ((x+y)%2==0){
-                    square.setBackground(Color.ORANGE);
-                }else{
-                    square.setBackground(Color.WHITE);
+                    tiles.setBackground(WHITE);
+                }else {
+                    tiles.setBackground(GRAY);
                 }
-                tiles[x][y] = square;
+                tiles.setEnabled(false);
+                squares[x][y] = tiles;
+                if (board[x][y]==null){
+                    board[x][y]=emptyTile;
+                }
+                tiles.add(new JLabel(board[x][y].icon));
+                p.add(tiles);
             }
         }
-        chessBoard.add(new JLabel(""));
-        chessBoard.setBackground(Color.LIGHT_GRAY);
+        //Add the different layers correctly
+        border.add(menu, BorderLayout.PAGE_START);
+        border.add(p);
+        game.add(border);
+    }
 
-        for (int x = 0; x < 8; x++){
-            chessBoard.add(
-                    new JLabel(columnText.substring(x,x+1),
-                            SwingConstants.CENTER));
+
+    private void showBoard()
+    {
+        int HEIGHT = 600;
+        int WIDTH = 600;
+        placeAllPiecesOnBoard();
+        createBoard(f);
+        addMoveButton();
+        f.setVisible(true);
+        f.setResizable(false);
+        f.setSize(WIDTH, HEIGHT);
+    }
+
+
+    // Places all pieces on the board
+    private void placeAllPiecesOnBoard() {
+        // Rows 0 and 1 will contain white pieces,
+        // and rows 6 and 7 will contain black pieces.
+
+        // Place pawns in rows 1 and 6
+        for (int i = 0; i < board.length; i++) {
+            board[1][i] = new Pawn(true);
+            board[6][i] = new Pawn(false);
         }
 
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                switch (y){
-                    case 0:
-                        chessBoard.add(new JLabel(""+(x+1),
-                                SwingConstants.CENTER));
-                    default:
-                        chessBoard.add(tiles[x][y]);
-                }
-            }
-        }
+        // Place white and black row pieces.
+        placeBackRowPieces(true, 0);
+        placeBackRowPieces(false, 7);
     }
 
-    public JComponent getChessBoard(){
-        return chessBoard;
-    }
+    //Creates all pieces behind the pawns
+    private void placeBackRowPieces(boolean white, int row) {
+        // Place rooks on the outside
+        board[row][0] = new Rook(white);
+        board[row][7] = new Rook(white);
 
-    public JComponent getGui(){
-        return gui;
-    }
+        // Place knights inside of rooks
+        board[row][1] = new Knight(white);
+        board[row][6] = new Knight(white);
 
+        // Place bishops inside of knights
+        board[row][2] = new Bishop(white);
+        board[row][5] = new Bishop(white);
+
+        // Place king and queen
+        board[row][3] = new Queen(white);
+        board[row][4] = new King(white);
+    }
 
 }
