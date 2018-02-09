@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Piece {
     enum ChessPiece{
-        PAWN, ROOK
+        PAWN, ROOK, KING
     }
 
     //enum Color{

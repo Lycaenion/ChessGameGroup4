@@ -37,12 +37,12 @@ public class GameBoard {
     static Piece blackPawn = new Pawn(false);
     static Piece blackRook = new Rook(false);
 
-    static Piece emptyTile = new EmptyTile();
+   private static Piece emptyTile = new EmptyTile();
 
-    JFrame f = new JFrame("Chess!");
-    JPanel p = new JPanel(new GridLayout(9,9,2,2));
-    JPanel border = new JPanel(new BorderLayout(10,10));
-    JToolBar menu = new JToolBar();
+   private JFrame f = new JFrame("Chess!");
+   private JPanel p = new JPanel(new GridLayout(9,9,2,2));
+   private JPanel border = new JPanel(new BorderLayout(10,10));
+   private JToolBar menu = new JToolBar();
 
     private final int HEIGHT = 600;
     private final int WIDTH = 600;
@@ -50,11 +50,11 @@ public class GameBoard {
     private static int COLUMNS = 8;
     private static JButton[][] squares = new JButton[ROWS][COLUMNS];
 
-    public static Piece[][] board = new Piece[8][8];
+    private static Piece[][] board = new Piece[8][8];
 
 
 
-    public void makeBoard(JFrame game){
+    private void makeBoard(JFrame game){
 
         for (int x = 0; x < 8 ; x++) {
             for (int y = 0; y < 8; y++) {
@@ -78,7 +78,7 @@ public class GameBoard {
         Action movePieces = new AbstractAction("Make a move") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //   movePiece();
+                   //movePiece();
             }
         };
         for (int i = 0; i < 25; i++) {
@@ -119,9 +119,5 @@ public class GameBoard {
         f.setSize(WIDTH,HEIGHT);
     }
 
-    /*public void movePiece(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\Jonas\\IdeaProjects\\ChessTest2\\src\\bilderchess\\black_knight.png");
-        squares[0][0].setIcon(icon);
-    }*/
 }
 
