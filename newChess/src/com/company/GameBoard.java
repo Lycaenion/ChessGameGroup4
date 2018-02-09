@@ -56,6 +56,8 @@ public class GameBoard {
 
     private void makeBoard(JFrame game){
 
+
+        //Place pieces
         for (int x = 0; x < 8 ; x++) {
             for (int y = 0; y < 8; y++) {
 
@@ -87,6 +89,9 @@ public class GameBoard {
         menu.add(movePieces);
         p.setBorder(new EmptyBorder(5,5,0,5));
 
+
+
+        //Create the chessboard
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLUMNS; y++) {
                 JButton tiles = new JButton();
@@ -106,6 +111,7 @@ public class GameBoard {
             }
         }
 
+        //Add the different layers correctly
         border.add(menu, BorderLayout.PAGE_START);
         border.add(p);
         game.add(border);
