@@ -25,15 +25,23 @@ import static java.awt.Color.*;
 
 public class GameBoard {
 
+
+    //White pieces
     static Piece whitePawn = new Pawn(true);
+    static Piece whiteRook = new Rook(true);
+    static Piece whiteKing = new King(true);
+
+
+   //Black pieces
+    static Piece blackKing = new King(false);
     static Piece blackPawn = new Pawn(false);
     static Piece blackRook = new Rook(false);
-    static Piece whiteRook = new Rook(true);
+
     static Piece emptyTile = new EmptyTile();
 
     JFrame f = new JFrame("Chess!");
     JPanel p = new JPanel(new GridLayout(9,9,2,2));
-    JPanel border = new JPanel(new BorderLayout(0,0));
+    JPanel border = new JPanel(new BorderLayout(10,10));
     JToolBar menu = new JToolBar();
 
     private final int HEIGHT = 600;
@@ -50,10 +58,14 @@ public class GameBoard {
 
         for (int x = 0; x < 8 ; x++) {
             for (int y = 0; y < 8; y++) {
+
+                board[0][3] = whiteKing;
                 board[1][y] = whitePawn;
-                board[6][y] = blackPawn;
                 board[0][0] = whiteRook;
                 board[0][7] = whiteRook;
+
+                board[7][3] = blackKing;
+                board[6][y] = blackPawn;
                 board[7][0] = blackRook;
                 board[7][7] = blackRook;
                 if (board[x][y]==null){
@@ -80,10 +92,11 @@ public class GameBoard {
                 JButton tiles = new JButton();
 
 
+               // p.setBackground(Color.WHITE);
                 if ((x+y)%2==0){
                     tiles.setBackground(WHITE);
                 }else {
-                    tiles.setBackground(RED);
+                    tiles.setBackground(GRAY);
                 }
                 tiles.setEnabled(false);
                 squares[x][y] = tiles;

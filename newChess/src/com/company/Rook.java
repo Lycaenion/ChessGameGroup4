@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Rook extends Piece{
 
     public Rook(boolean color) {
-        this.value=5;
+        this.value=20;
         this.piece=ChessPiece.ROOK;
 
         if(color) {
