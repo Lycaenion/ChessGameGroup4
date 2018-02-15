@@ -1,18 +1,18 @@
 import javax.swing.*;
 
-public class Knight extends Piece{
+class Knight extends Piece {
 
-    public Knight(boolean color) {
-        this.value=20;
-        this.piece=ChessPiece.KNIGHT;
+    public Knight(boolean white) {
+        this.white = white;
+        this.str = (white) ? "N" : "n";
 
-        if(color) {
-            String whiteKnight = "white_knight.png";
-            this.icon = new ImageIcon(imageURL + whiteKnight);
-        }else{
-            String blackKnight = "black_knight.png";
-            this.icon = new ImageIcon(imageURL + blackKnight);
-        }
+        String imgstr = "bilderchess/" + ((white) ? "white_knight.png" : "black_knight.png");
+        this.img = new ImageIcon( Piece.class.getResource(imgstr) );
+    }
 
+    @Override
+    boolean validMove(int xfrom, int yfrom, int xto, int yto, boolean capture) {
+        return ((Math.abs(xfrom - xto) == 1 && Math.abs(yfrom - yto) == 2) ||
+                (Math.abs(yfrom - yto) == 1 && Math.abs(xfrom - xto) == 2));
     }
 }

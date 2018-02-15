@@ -1,17 +1,17 @@
 import javax.swing.*;
 
-public class Rook extends Piece{
+class Rook extends Piece {
 
-    public Rook(boolean color) {
-        this.value=20;
-        this.piece=ChessPiece.ROOK;
+    public Rook(boolean white) {
+        this.white = white;
+        this.str = (white) ? "R" : "r";
 
-        if(color) {
-            String whiteRook = "white_rook.png";
-            this.icon = new ImageIcon(imageURL + whiteRook);
-        }else{
-            String blackRook = "black_rook.png";
-            this.icon = new ImageIcon(imageURL + blackRook);
-        }
+        String imgstr = "bilderchess/" + ((white) ? "white_rook.png" : "black_rook.png");
+        this.img = new ImageIcon( getClass().getResource(imgstr) );
+    }
+
+    @Override
+    boolean validMove(int xfrom, int yfrom, int xto, int yto, boolean capture) {
+        return isUpDownLeftRight(xfrom, yfrom, xto, yto);
     }
 }

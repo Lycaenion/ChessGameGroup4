@@ -1,18 +1,17 @@
 import javax.swing.*;
 
-public class Bishop extends Piece{
+class Bishop extends Piece {
 
-    public Bishop(boolean color) {
-        this.value=20;
-        this.piece=ChessPiece.BISHOP;
+    public Bishop(boolean white) {
+        this.white = white;
+        this.str = (white) ? "B" : "b";
 
-        if(color) {
-            String whiteBishop = "white_bishop.png";
-            this.icon = new ImageIcon(imageURL + whiteBishop);
-        }else{
-            String blackBishop = "black_bishop.png";
-            this.icon = new ImageIcon(imageURL + blackBishop);
-        }
+        String imgstr = "bilderchess/" + ((white) ? "white_bishop.png" : "black_bishop.png");
+        this.img = new ImageIcon( Piece.class.getResource(imgstr) );
+    }
 
+    @Override
+    boolean validMove(int xfrom, int yfrom, int xto, int yto, boolean capture) {
+        return isDiagonal(xfrom, yfrom, xto, yto);
     }
 }

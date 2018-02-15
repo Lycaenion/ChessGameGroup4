@@ -1,17 +1,20 @@
 import javax.swing.*;
 
-public class Queen extends Piece{
-    public Queen(boolean color) {
-        this.value=20;
-        this.piece=ChessPiece.QUEEN;
+class Queen extends Piece {
 
-        if(color) {
-            String whiteQueen = "white_queen.png";
-            this.icon = new ImageIcon(imageURL + whiteQueen);
-        }else{
-            String blackQueen = "black_queen.png";
-            this.icon = new ImageIcon(imageURL + blackQueen);
-        }
+    public Queen(boolean white) {
+        this.white = white;
+        this.str = (white) ? "Q" : "q";
 
+        String imgstr = "bilderchess/" + ((white) ? "white_queen.png" : "black_queen.png");
+        this.img = new ImageIcon( getClass().getResource(imgstr) );
+    }
+
+    @Override
+    boolean validMove(int xfrom, int yfrom, int xto, int yto, boolean capture) {
+        // A Queen can move any number of spaces vertically, horizontally,
+        // diagonally, in any direction.
+        return (isDiagonal(xfrom, yfrom, xto, yto) ||
+                isUpDownLeftRight(xfrom, yfrom, xto, yto));
     }
 }

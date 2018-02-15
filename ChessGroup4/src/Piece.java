@@ -1,12 +1,29 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class Piece {
-    enum ChessPiece{PAWN, ROOK, KING, QUEEN, BISHOP, KNIGHT}
+public abstract class Piece {
+    // A piece is white or black; White moves first
+    public boolean white;
+    public String str;
+    public ImageIcon img;
 
-    int value;
-    protected ImageIcon icon;
-    protected ChessPiece piece;
-    String imageURL = "D:\\AdvancedJava\\chessGame\\ChessGameGroup4\\ChessGroup4\\src\\bilderchess\\";
-    Piece(){ }
+    // Set to false after a piece's first move
+    public boolean firstMove = true;
 
+    abstract boolean validMove(int xfrom, int yfrom, int xto, int yto, boolean capture);
+
+    static boolean isDiagonal(int xfrom, int yfrom, int xto, int yto) {
+        // A move is diagonal if abs(dx) == abs(dy)
+        return (Math.abs(xto - xfrom) == Math.abs(yto - yfrom));
+    }
+
+    static boolean isUpDownLeftRight(int xfrom, int yfrom, int xto, int yto) {
+        // Either only the y changes, or only the x changes.
+        return ((xfrom == xto && yfrom != yto) ||
+                (yfrom == yto && xfrom != xto));
+    }
+
+    public void paint(Graphics g, int x, int y) {
+        g.drawImage(this.img.getImage(), x, y, null);
+    }
 }
