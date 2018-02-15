@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Piece {
     enum ChessPiece{
@@ -10,6 +12,10 @@ public class Piece {
     //enum Color{
    //     WHITE, BLACK
    // }
+
+    List<Piece> pieces = new ArrayList<>();
+    Pawn pawn = new Pawn(true);
+
 
 
     int value;
@@ -21,9 +27,9 @@ public class Piece {
         this.color = color;
     }
 
-    /*public Color getColor() {
-        return color;
-    }*/
+    public void addPiecesToList() {
+        pieces.add(pawn);
+    }
 
     Piece(){
         this.color = color;
@@ -33,7 +39,11 @@ public class Piece {
     }
 
     public void setPiece(){
+
         this.piece = piece;
     }
+
+
+
 
 }
