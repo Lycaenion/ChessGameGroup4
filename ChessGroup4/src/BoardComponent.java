@@ -1,65 +1,108 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import javax.swing.JComponent;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import static java.awt.Color.*;
 
-public class BoardComponent extends JComponent {
+public class BoardComponent {
 
-    static Color dark, light, red;
-    static Font font;
 
-    static int xy, height, width;
+    //White pieces
+    static Piece whitePawn = new Pawn(true);
+    static Piece whiteRook = new Rook(true);
+    static Piece whiteKing = new King(true);
 
-    public BoardComponent() {
-        dark = new Color(102, 130, 132);
-        light = new Color(185, 215, 217);
-        red = new Color(200, 59, 59);
-        font = new Font("Helvetica", Font.BOLD, 36);
 
-        xy = GameBoard.PIECE_XY;
-        height = GameBoard.HEIGHT;
-        width = GameBoard.WIDTH;
-    }
+    //Black pieces
+    static Piece blackKing = new King(false);
+    static Piece blackPawn = new Pawn(false);
+    static Piece blackRook = new Rook(false);
 
-    public void paintComponent(Graphics g) {
-        g.setColor(red);
-        g.fillRect(0, 0, GameBoard.WIDTH, GameBoard.HEIGHT);
+    private static Piece emptyTile = new EmptyTile();
 
-        paintCheckers(g);
-        paintPieces(g);
+    private JFrame f = new JFrame("Chess!");
+    private JPanel p = new JPanel(new GridLayout(9,9,2,2));
+    private JPanel border = new JPanel(new BorderLayout(10,10));
+    private JToolBar menu = new JToolBar();
 
-//		g.setColor(red);
-//		g.setFont(font);
-//		g.drawString("Invalid", 50, Chess.HEIGHT / 2);
-    }
+    private final int HEIGHT = 600;
+    private final int WIDTH = 600;
+    private static int ROWS = 8;
+    private static int COLUMNS = 8;
+    private static JButton[][] squares = new JButton[ROWS][COLUMNS];
 
-    private static void paintPieces(Graphics g) {
-        for (int y = 0; y < GameBoard.board.length; y++) {
-            for (int x = 0; x < GameBoard.board[y].length; x++) {
-                Piece piece = GameBoard.board[y][x];
-                if (piece != null) {
-                    piece.paint(g, x * xy, y * xy);
+    private static Piece[][] board = new Piece[8][8];
+
+
+
+    private void makeBoard(JFrame game){
+
+
+        //Place pieces
+        for (int x = 0; x < 8 ; x++) {
+            for (int y = 0; y < 8; y++) {
+
+                board[0][3] = whiteKing;
+                board[1][y] = whitePawn;
+                board[0][0] = whiteRook;
+                board[0][7] = whiteRook;
+
+                board[7][3] = blackKing;
+                board[6][y] = blackPawn;
+                board[7][0] = blackRook;
+                board[7][7] = blackRook;
+                if (board[x][y]==null){
+                    board[x][y]=emptyTile;
                 }
             }
         }
-    }
 
-    private static void paintCheckers(Graphics g) {
-        boolean swap = true;
+        menu.setFloatable(false);
+        Action movePieces = new AbstractAction("Make a move") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //movePiece();
+            }
+        };
+        for (int i = 0; i < 25; i++) {
+            menu.addSeparator();
+        }
+        menu.add(movePieces);
+        p.setBorder(new EmptyBorder(5,5,0,5));
 
-        for (int x = 0; x < width; x += xy) {
-            for (int y = 0; y < height; y += xy) {
-                if (swap) {
-                    g.setColor(dark);
-                } else {
-                    g.setColor(light);
+
+
+        //Create the chessboard
+        for (int x = 0; x < ROWS; x++) {
+            for (int y = 0; y < COLUMNS; y++) {
+                JButton tiles = new JButton();
+
+
+                // p.setBackground(Color.WHITE);
+                if ((x+y)%2==0){
+                    tiles.setBackground(WHITE);
+                }else {
+                    tiles.setBackground(GRAY);
                 }
-                g.fillRect(x, y, xy, xy);
-                swap = !swap;
+                tiles.setEnabled(false);
+                squares[x][y] = tiles;
+                tiles.add(new JLabel(board[x][y].img));
+                p.add(tiles);
+
             }
         }
 
-        g.setColor(new Color(123, 59, 59));
-        g.fillRect(0, height-xy/2, width, xy);
+        //Add the different layers correctly
+        border.add(menu, BorderLayout.PAGE_START);
+        border.add(p);
+        game.add(border);
+
+    }
+
+    public void showBoard(){
+        makeBoard(f);
+        f.setVisible(true);
+        f.setResizable(false);
+        f.setSize(WIDTH,HEIGHT);
     }
 }
